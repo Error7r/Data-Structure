@@ -85,6 +85,12 @@ void DeleteBegin(nodeptr &plist)
 
 void DeleteMid(nodeptr &plist)
 {
+
+    if(plist == NULL)
+    {
+        cout<<"There are no linklist\n";
+        return;
+    }
     int I;
     cout<<"Enter the Index of linklist: ";cin>>I;
 
@@ -101,6 +107,12 @@ void DeleteMid(nodeptr &plist)
 
 void DeleteEnd(nodeptr &plist)
 {
+
+    if(plist == NULL)
+    {
+        cout<<"There are no linklist\n";
+        return;
+    }
     nodeptr q = plist;
     nodeptr p;
     for(p = plist; p->next != NULL;p= p->next)
