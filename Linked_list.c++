@@ -52,7 +52,7 @@ void InsertMid(nodeptr &plist)
 
     // ... new_node I ... | IF the condetion I - 1
     // ... I new_node ... | IF the condetion I
-    for(int i = 1;i < I-1; i++)
+    for(int i = 1;i < I; i++)
         q = q->next;
     
     p->next = q->next;
@@ -73,6 +73,11 @@ void InsertEnd(nodeptr &plist)
 
 void DeleteBegin(nodeptr &plist)
 {
+    if(plist == NULL)
+    {
+        cout<<"There are no linklist\n";
+        return;
+    }
     nodeptr p = plist;
     plist = plist->next;
     delete(p);
@@ -108,5 +113,42 @@ void DeleteEnd(nodeptr &plist)
 
 int main()
 {
-   
+   nodeptr plist;
+    CreatLinklist(plist);
+    int x;
+    while(true)
+    {
+        cout<<"1.Insert 2.Delete\n";
+        cout<<"Enter one of the following: ";
+        cin>>x;
+        if(x == 1)
+        {
+            cout<<"1.Insert Begin 2.InsertMid 3.InsertEnd\n";
+            cout<<"Enter one of the following: ";
+            cin>>x;
+
+            if(x == 1)
+                InsertBegin(plist);
+            else if(x == 2)
+                InsertMid(plist);
+            else if(x == 3)
+                InsertEnd(plist);
+        }
+        else if(x == 2)
+        {
+            cout<<"1.DeleteBegin 2.DeleteMid 3.DeleteEnd\n";
+            cout<<"Enter one of the following: ";
+            cin>>x;
+
+            if(x == 1)
+                DeleteBegin(plist);
+            else if(x == 2)
+                DeleteMid(plist);
+            else if(x == 3)
+                DeleteEnd(plist);
+        }
+
+        PrintLinkList(plist);
+    }
+    return 0;
 }
