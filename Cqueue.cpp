@@ -3,71 +3,82 @@ using namespace std;
 
 #define size 4
 int Cqueue[size];
-int r= -1;
-int f=-1;
+int f = -1, r = -1;
+
 
 void Insert()
 {
-    if((r + 1) % size == f) // or (f == 0 && r == size -1) || r = f-1
+    if( (f == 0 && r == size-1) || (r+1 == f) )
     {
-        cout<<"The Cqueue is FULL!\n";
+        cout<<"The Cqeueu is Full\n";
         return;
     }
 
-    int value;
-    cout<<"Enter the value: ";
-    cin>>value;
-    
-    if (f == -1)
-        f = r = 0;
+    if(r == size -1)
+        r = 0;
     else
-        r = (r + 1) % size;
+        r++;
 
+    int value;
+    cout<<"Enter the value: "; cin>>value;
     Cqueue[r] = value;
+
+    if(f == -1) f= 0;
+    
 }
+
+
 void Delete()
 {
     if(f == -1)
-        cout<<"The queue is Empty!\n";
+        cout<<"The Cqueue is empty!\n";
     else if(f == r)
-        r = f = -1;
-    else 
-        f = (f + 1) % size;
+        f = r = -1;
+    else if(f == size -1)
+        f = 0;
+    else
+        f++;
 }
+
 
 void Print()
 {
     if(f == -1)
-    {
-        cout<<"The Cqueue is Empty!\n";
-        return;
-    }
-
-    cout<<"The Cqueue is: ";
-    if(r < f)
-    {
-        for(int i = f; i<size;i++)
-            cout<<Cqueue[i]<<' ';
-
-        for(int i = 0; i<=r;i++)
-            cout<<Cqueue[i]<<' ';
-    }
+        cout<<"The Cqueue is empty!\n";
     else
-        for(int i = f;i <=r;i++)
-            cout<<Cqueue[i]<<' ';
-    cout<<endl;
+    {
+        cout<<"The Cqueue is: ";
+
+        if(r < f)
+        {
+            for(int i = f ; i < size ; i++)
+                cout<<Cqueue[i]<<' ';
+                
+            for(int i = 0; i <= r; i++)
+                cout<<Cqueue[i]<<' ';
+        }
+        else 
+            for(int i = f ; i <= r ; i++)
+                cout<<Cqueue[i]<<' ';
+
+        cout<<endl;
+    }
 }
+
 
 int main()
 {
     int x;
     while(true)
     {
-        cout<<"Enter 1.Insert or 2.Delete : ";
-        cin>>x;
+        cout<<"1.Insert 2.Delete 3.Print\n";
+        cout<<"Index: "; cin>>x;
 
-        if (x == 1) Insert();
-        else if(x == 2) Delete();
-        Print();
+        if(x == 1)
+            Insert();
+        else if(x == 2)
+            Delete();
+        else if(x == 3)
+            Print();
     }
 }

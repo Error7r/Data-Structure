@@ -1,50 +1,44 @@
 #include <iostream>
 using namespace std;
 
-#define size 5
+#define size 6
+int stack[size];
 int top = -1;
-int arr[size];
 
-void push()
+
+void Push()
 {
-    
-    if(top == size -1)
+    if(top == size -1 )
+        cout<<"The stack is full\n";
+    else
     {
-        cout<<"The stack is FULL!\n";
-        return;
-    } 
-        
-    
-    int value;
-    cout<<"Enter a num: ";cin>>value;
-
-    top++;
-    arr[top] = value;   
-    
-}
-
-void pop()
-{   
-    if(top == -1) cout<<"The stack is empty!\n";
-    else 
-    {
-        top--;
-        cout<<"Pop done!\n";
+        int value;
+        cout<<"Etner the value: "; cin>>value;
+        stack[++top] = value;
     }
 }
 
-void print()
+
+void Pop()
+{
+    if(top == -1)
+        cout<<"The stack is empty\n";
+    else
+        top--;
+}
+
+
+void Print()
 {
     if(top  == -1)
-    {
         cout<<"The stack is Empty!\n";
-        return;
+    else
+    {
+        cout<<"The stack is: ";
+        for(int i = 0 ; i <= top ; i++)
+        cout<<stack[i]<<' ';
+        cout<<endl;
     }
-
-    cout<<"The stack: ";
-    for(int i = 0 ; i <= top ; i++)
-        cout<<arr[i]<<' ';
-    cout<<endl;
 }
 
 
@@ -53,11 +47,14 @@ int main()
     int x;
     while(true)
     {
-        cout<<"Enter 1.Push or 2.Pop : ";
-        cin>>x;
+        cout<<"1.push 2.pop 3.print\n";
+        cout<<"index: ";cin>>x;
 
-        if(x == 1) push();
-        else if(x == 2) pop();
-        print();
+        if(x==1)
+            Push();
+        else if(x == 2)
+            Pop();
+        else if(x == 3)
+            Print();
     }
 }

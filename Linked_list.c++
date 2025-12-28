@@ -6,28 +6,32 @@ struct node{
     node * next;
 };
 #define nodeptr node* 
+#define null 0
+
 
 void CreatLinklist(nodeptr &plist)
 {
     plist = new node;
     cout<<"Enter the fisrt value in LinkList: ";
     cin>>plist->value;
-    plist->next = NULL;
+    plist->next = null;
 }
 
 void PrintLinkList(nodeptr &plist)
 {
-    if(plist == NULL)
+    if(plist == null)
         cout<<"The LinkList is empty!\n"; 
     else
     {
         cout<<"The LinkList is: ";
-        for(nodeptr p = plist; p != NULL ; p = p->next)
+        for(nodeptr p = plist; p != null ; p = p->next)
             cout<<p->value<<" ";
         cout<<endl;
     }
 }
 
+
+//Insert Functions
 void InsertBegin(nodeptr &plist)
 {
     nodeptr p = new node;
@@ -66,14 +70,18 @@ void InsertEnd(nodeptr &plist)
     cin>>p->value;
 
     nodeptr q;
-    for(q = plist;q->next != NULL;q = q->next);
+    for(q = plist;q->next != null;q = q->next);
+
+
     q->next = p;
-    p->next = NULL;
+    p->next = null;
 }
 
+
+//Delete Functions
 void DeleteBegin(nodeptr &plist)
 {
-    if(plist == NULL)
+    if(plist == null)
     {
         cout<<"There are no linklist\n";
         return;
@@ -86,7 +94,7 @@ void DeleteBegin(nodeptr &plist)
 void DeleteMid(nodeptr &plist)
 {
 
-    if(plist == NULL)
+    if(plist == null)
     {
         cout<<"There are no linklist\n";
         return;
@@ -108,25 +116,27 @@ void DeleteMid(nodeptr &plist)
 void DeleteEnd(nodeptr &plist)
 {
 
-    if(plist == NULL)
+    if(plist == null)
     {
         cout<<"There are no linklist\n";
         return;
     }
     nodeptr q = plist;
     nodeptr p;
-    for(p = plist; p->next != NULL;p= p->next)
+    for(p = plist; p->next != null;p= p->next)
         q = p;
 
     delete(p);
-    q->next = NULL;
+    q->next = null;
 }
 
 
+//Main Function
 int main()
 {
-   nodeptr plist;
+    nodeptr plist;
     CreatLinklist(plist);
+
     int x;
     while(true)
     {
@@ -159,6 +169,7 @@ int main()
             else if(x == 3)
                 DeleteEnd(plist);
         }
+        
 
         PrintLinkList(plist);
     }
