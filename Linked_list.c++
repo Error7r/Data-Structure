@@ -1,64 +1,57 @@
 #include <iostream>
 using namespace std;
 
-struct node{
+struct node
+{
     int value;
-    node * next;
+    node* next;
 };
-#define nodeptr node* 
-#define null 0
 
+typedef node* nodeptr;
+#define null 0 
 
-void CreatLinklist(nodeptr &plist)
+void CreateLL(nodeptr &plist)
 {
     plist = new node;
-    cout<<"Enter the fisrt value in LinkList: ";
-    cin>>plist->value;
+    cout<<"Enter the frist value: ";cin>>plist->value;
     plist->next = null;
 }
 
-void PrintLinkList(nodeptr &plist)
+void PrintLL(nodeptr &plist)
 {
     if(plist == null)
-        cout<<"The LinkList is empty!\n"; 
+        cout<<"There is no linklist\n";
     else
     {
         cout<<"The LinkList is: ";
         for(nodeptr p = plist; p != null ; p = p->next)
-            cout<<p->value<<" ";
+            cout<<p->value<<' ';
         cout<<endl;
     }
 }
 
 
-//Insert Functions
-void InsertBegin(nodeptr &plist)
+void InsertBeg(nodeptr &plist)
 {
     nodeptr p = new node;
-    cout<<"Enter the value to insertBegin: ";
-    cin>>p->value;
+    cout<<"Enter the value: ";cin>>p->value;
 
     p->next = plist;
     plist = p;
-    
 }
 
 void InsertMid(nodeptr &plist)
 {
-    int I;
-    cout<<"Enter the Index of linklist: ";cin>>I;
-
     nodeptr p = new node;
-    cout<<"Enter the value to insertMid: ";
-    cin>>p->value;
-
-    nodeptr q = plist;
-
-    // ... new_node I ... | IF the condetion I - 1
-    // ... I new_node ... | IF the condetion I
-    for(int i = 1;i < I; i++)
-        q = q->next;
+    cout<<"Enter the value: ";cin>>p->value;
     
+    int I;
+    cout<<"Enter the index: ";cin>>I;
+    
+    nodeptr q = plist;
+    for(int i = 1; i < I; i++)
+        q = q->next;
+
     p->next = q->next;
     q->next = p;
 }
@@ -66,81 +59,74 @@ void InsertMid(nodeptr &plist)
 void InsertEnd(nodeptr &plist)
 {
     nodeptr p = new node;
-    cout<<"Enter the value to insertEnd: ";
-    cin>>p->value;
-
+    cout<<"Enter the value: ";cin>>p->value;
+    
     nodeptr q;
-    for(q = plist;q->next != null;q = q->next);
-
+    for(q = plist ; q->next != null; q = q->next);
 
     q->next = p;
     p->next = null;
 }
 
-
-//Delete Functions
-void DeleteBegin(nodeptr &plist)
+void DeleteBeg(nodeptr &plist)
 {
     if(plist == null)
+        cout<<"There is no linklist!\n";
+    else 
     {
-        cout<<"There are no linklist\n";
-        return;
+        nodeptr p = plist;
+        plist = plist->next;
+        delete(p);
     }
-    nodeptr p = plist;
-    plist = plist->next;
-    delete(p);
-}
+} 
 
 void DeleteMid(nodeptr &plist)
 {
-
     if(plist == null)
+        cout<<"There is no linklist!\n";
+    else
     {
-        cout<<"There are no linklist\n";
-        return;
+        int I;
+        cout<<"Enter the index: ";cin>>I;
+        nodeptr q;
+        nodeptr p = plist;
+        for(int i = 1; i < I ; i++)
+        {
+            q = p;
+            p = p->next;
+        }
+        q->next = p->next;
+        delete(p);
     }
-    int I;
-    cout<<"Enter the Index of linklist: ";cin>>I;
-
-    nodeptr p= plist;
-    nodeptr q;
-    for(int i = 1;i < I;i++)
-    {
-        q = p;
-        p = p->next;
-    }
-    q->next = p->next;
-    delete(p);
 }
+
 
 void DeleteEnd(nodeptr &plist)
 {
-
     if(plist == null)
+        cout<<"There is no linklist!\n";
+    else
     {
-        cout<<"There are no linklist\n";
-        return;
-    }
-    nodeptr q = plist;
-    nodeptr p;
-    for(p = plist; p->next != null;p= p->next)
-        q = p;
+        nodeptr p;
+        nodeptr q;
 
-    delete(p);
-    q->next = null;
+        for(p = plist; p->next != null; p = p->next)
+            q= p;
+        
+        q->next = null;
+        delete(p);
+    }
 }
 
-
-//Main Function
 int main()
 {
     nodeptr plist;
-    CreatLinklist(plist);
+    CreateLL(plist);
 
     int x;
     while(true)
     {
-        cout<<"1.Insert 2.Delete\n";
+        cout<<"1.Insert 2.Delete\n3.Print\n";
         cout<<"Enter one of the following: ";
         cin>>x;
         if(x == 1)
@@ -150,7 +136,7 @@ int main()
             cin>>x;
 
             if(x == 1)
-                InsertBegin(plist);
+                InsertBeg(plist);
             else if(x == 2)
                 InsertMid(plist);
             else if(x == 3)
@@ -163,15 +149,13 @@ int main()
             cin>>x;
 
             if(x == 1)
-                DeleteBegin(plist);
+                DeleteBeg(plist);
             else if(x == 2)
                 DeleteMid(plist);
             else if(x == 3)
                 DeleteEnd(plist);
         }
-        
-
-        PrintLinkList(plist);
+        else if(x == 3)
+            PrintLL(plist);
     }
-    return 0;
 }
